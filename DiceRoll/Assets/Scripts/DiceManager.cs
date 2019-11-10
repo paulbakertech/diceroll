@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DiceManager : MonoBehaviour
 {
@@ -9,14 +8,9 @@ public class DiceManager : MonoBehaviour
 
     private bool WaitingForNewScore;
 
-    public Text ScoreText;
-
-    private int currentScore = 0;
-
     private void Start()
     {
         this.WaitingForNewScore = false;
-        this.UpdateScore();
     }
 
     private void Update()
@@ -25,14 +19,8 @@ public class DiceManager : MonoBehaviour
         {
             if (this.CheckIfAllStopped())
             {
-                int newScore = this.GetTotalScore();
-                this.currentScore += newScore;
-                this.UpdateScore();
                 this.WaitingForNewScore = false;
-                if (newScore == 2)
-                {
-                    Debug.Log("GAME OVER!");
-                }
+                GameManager.Instance.AddRollToScore(this.GetTotalScore());
             }
         }
     }
@@ -51,8 +39,9 @@ public class DiceManager : MonoBehaviour
         return allStopped;
     }
 
-    public void Roll()
+    public bool Roll()
     {
+        bool diceRolled = false;
         if (!this.WaitingForNewScore)
         {
             this.Reset();
@@ -61,7 +50,9 @@ public class DiceManager : MonoBehaviour
             {
                 die.Roll();
             }
+            diceRolled = true;
         }
+        return diceRolled;
     }
 
     public void Reset()
@@ -81,10 +72,5 @@ public class DiceManager : MonoBehaviour
             total += die.CurrentSide;
         }
         return total;
-    }
-
-    private void UpdateScore()
-    {
-        this.ScoreText.text = string.Format("SCORE: {0}", this.currentScore);
     }
 }
