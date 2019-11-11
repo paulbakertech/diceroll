@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+/// This is a default single template I've used for many other Unity projects.
+
 /// <summary>
 /// Be aware this will not prevent a non singleton constructor
 ///   such as `T myT = new T();`

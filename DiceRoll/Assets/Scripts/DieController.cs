@@ -10,7 +10,6 @@ public enum DieStatus
     Stopped
 }
 
-
 public class DieController : MonoBehaviour
 {
     // Keep track of the current side;
@@ -52,24 +51,30 @@ public class DieController : MonoBehaviour
         }
         else if (this.DieStatus == DieStatus.Rolling)
         {
-            float maxValue = -1.0f;
-            int maxSideIndex = -1;
-            for (int i = 0; i < this.sideList.Count; i++)
+            if (this.IsRolling())
             {
-                // Go through each side and determine which side is pointing up.
-                float dotValue = Vector3.Dot(Vector3.up, this.transform.TransformDirection(this.sideList[i].Item2));
-                if (dotValue > maxValue)
+                // Continue rolling
+            }
+            else
+            { 
+                // Determine top facing side.
+                float maxValue = -1.0f;
+                int maxSideIndex = -1;
+                for (int i = 0; i < this.sideList.Count; i++)
                 {
-                    maxValue = dotValue;
-                    maxSideIndex = i;
+                    // Go through each side and determine which side is pointing up.
+                    float dotValue = Vector3.Dot(Vector3.up, this.transform.TransformDirection(this.sideList[i].Item2));
+                    if (dotValue > maxValue)
+                    {
+                        maxValue = dotValue;
+                        maxSideIndex = i;
+                    }
                 }
-            }
-            if (maxSideIndex >= 0)
-            {
-                this.CurrentSide = this.sideList[maxSideIndex].Item1;
-            }
-            if (this.IsRolling() == false)
-            {
+                if (maxSideIndex >= 0)
+                {
+                    this.CurrentSide = this.sideList[maxSideIndex].Item1;
+                    // Debug.Log(this.CurrentSide);
+                }
                 this.DieStatus = DieStatus.Stopped;
             }
         }
@@ -77,19 +82,15 @@ public class DieController : MonoBehaviour
 
     private bool IsRolling()
     {
-        bool rolling = true;
-        if (this.rigidBody.velocity.magnitude == 0f)
-        {
-            if (this.rigidBody.angularVelocity.magnitude == 0f)
-            {
-                rolling = false;
-            }
-        }
-        return rolling;
+        // Return true if die is still moving or above the table surface.
+        return (this.rigidBody.velocity.magnitude > 0f) ||
+               (this.rigidBody.angularVelocity.magnitude > 0f) ||
+               (this.transform.position.y > 0.65f);
     }
 
     public void Roll()
     {
+        // Kick the die up in the air and add a random rotation about all axis.
         this.rigidBody.AddForce(Vector3.up * Random.Range(0.5f, 1.5f), ForceMode.Impulse);
         this.rigidBody.AddTorque(Vector3.left * Random.Range(1f, 50f), ForceMode.Impulse);
         this.rigidBody.AddTorque(Vector3.forward * Random.Range(1f, 50f), ForceMode.Impulse);
@@ -105,5 +106,4 @@ public class DieController : MonoBehaviour
         this.transform.rotation = Quaternion.identity;
         this.DieStatus = DieStatus.Ready;
     }
-
 }

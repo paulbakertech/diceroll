@@ -1417,7 +1417,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!65 &809854700
 BoxCollider:
@@ -1907,7 +1907,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1273525388
 MeshCollider:
@@ -2879,7 +2879,7 @@ PrefabInstance:
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.564
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
@@ -2889,7 +2889,7 @@ PrefabInstance:
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.951
+      value: -1.14
       objectReference: {fileID: 0}
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
@@ -2948,7 +2948,7 @@ PrefabInstance:
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.77
+      value: -1.36
       objectReference: {fileID: 0}
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
@@ -2958,7 +2958,7 @@ PrefabInstance:
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.13
       objectReference: {fileID: 0}
     - target: {fileID: 5316439421512941736, guid: 85c19277568271149a319ba7801ff807,
         type: 3}

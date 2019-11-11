@@ -12,9 +12,10 @@ public class GameManager : Singleton<GameManager>
     private int HighScore;
     private int CurrentScore;
 
+    private bool TestMode = true;
+
     private void Start()
     {
-        this.HighScore = 0;
         this.ResetGame();
     }
 
@@ -51,7 +52,7 @@ public class GameManager : Singleton<GameManager>
     {
         this.MenuController.UpdateScoreText(this.CurrentScore, this.CurrentScore + score);
         this.CurrentScore += score;
-        if (score == 2)
+        if (score == 2) // Game is over!
         {
             this.MenuController.UpdateFinalScoreText(this.CurrentScore);
             if (this.CurrentScore > this.HighScore)
@@ -71,6 +72,11 @@ public class GameManager : Singleton<GameManager>
         else
         {
             this.AudioController.PlaySound(2);
+            // Play the game automatically for testing.
+            if (this.TestMode)
+            {
+                this.RollDice();
+            }
         }
     }
 
