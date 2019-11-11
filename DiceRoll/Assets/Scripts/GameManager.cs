@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     private int HighScore;
     private int CurrentScore;
 
-    private bool TestMode = true;
+    private bool TestMode = false;
 
     private void Start()
     {
