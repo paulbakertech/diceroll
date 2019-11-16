@@ -59,7 +59,7 @@ public class JenkinsBuild
     {
         string appName = "DiceRoll";
         string targetDir = "D:\\Unity\\Builds";
-
+        /*
         string[] args = System.Environment.GetCommandLineArgs();
         for (int i = 0; i < args.Length; i++)
         {
@@ -78,7 +78,7 @@ public class JenkinsBuild
                 }
             }
         }
-
+        */
         string fullPathAndName = targetDir + System.IO.Path.DirectorySeparatorChar + appName + ".apk";
         BuildProject(EnabledScenes, fullPathAndName, BuildTargetGroup.Standalone, BuildTarget.Android, BuildOptions.None);
     }
