@@ -11,7 +11,7 @@ using UnityEditor.Build.Reporting;
 // ------------------------------------------------------------------------
 namespace Build
 {
-    public class JenkinsBuild
+    public class AutoBuild
     {
 
         static string[] EnabledScenes = FindEnabledEditorScenes();
