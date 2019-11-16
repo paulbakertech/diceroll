@@ -53,6 +53,39 @@ public class JenkinsBuild
     }
 
     // ------------------------------------------------------------------------
+    // called from Jenkins
+    // ------------------------------------------------------------------------
+    public static void BuildAndroid()
+    {
+        string appName = "DiceRoll";
+        string targetDir = "D:\\Unity\\Builds";
+
+        string[] args = System.Environment.GetCommandLineArgs();
+        for (int i = 0; i < args.Length; i++)
+        {
+            if (args[i] == "-executeMethod")
+            {
+                if (i + 4 < args.Length)
+                {
+                    appName = args[i + 2];
+                    targetDir = args[i + 3];
+                    i += 3;
+                }
+                else
+                {
+                    System.Console.WriteLine("[JenkinsBuild] Incorrect Parameters for -executeMethod Format: -executeMethod BuildMacOS <app name> <output dir>");
+                    return;
+                }
+            }
+        }
+
+        string fullPathAndName = targetDir + System.IO.Path.DirectorySeparatorChar + appName + ".apk";
+        BuildProject(EnabledScenes, fullPathAndName, BuildTargetGroup.Standalone, BuildTarget.Android, BuildOptions.None);
+    }
+
+
+
+    // ------------------------------------------------------------------------
     // ------------------------------------------------------------------------
     private static string[] FindEnabledEditorScenes()
     {
