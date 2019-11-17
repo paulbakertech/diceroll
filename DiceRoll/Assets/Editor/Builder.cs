@@ -48,10 +48,16 @@ public class Builder : ScriptableObject
     static void GenericBuild(string[] scenes, string app_target, BuildTarget build_target, BuildOptions build_options)
     {
         EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Standalone, build_target);
-        BuildReport res = BuildPipeline.BuildPlayer(scenes, app_target, build_target, build_options);
-        if (res != null)
+        BuildReport report = BuildPipeline.BuildPlayer(scenes, app_target, build_target, build_options);
+        BuildSummary summary = report.summary;
+        if (summary.result == BuildResult.Succeeded)
         {
-            throw new Exception("BuildPlayer failure: " + res);
+            Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
+        }
+
+        if (summary.result == BuildResult.Failed)
+        {
+            Debug.Log("Build failed");
         }
     }
 }
